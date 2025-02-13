@@ -1,0 +1,175 @@
+/* Appliquer la police Lexend uniquement aux textes */
+* {
+  font-family: "Lexend", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header flottant ultra stylé */
+.header {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  max-width: 1300px;
+  background: linear-gradient(135deg, #007fff 30%, #ff007f 100%);
+  border-radius: 20px;
+  padding: 18px 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  border: 3px solid #ffd700;
+  backdrop-filter: blur(15px);
+  transition: all 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+/* Effet néon sur hover */
+.header:hover {
+  box-shadow: 0px 10px 25px rgba(255, 0, 127, 0.6);
+}
+
+/* Logo container */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+/* Logo image */
+.logo-img {
+  height: 50px;
+  width: auto;
+  transition: transform 0.2s ease-in-out;
+  filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.7)); /* Glow sur le logo */
+}
+
+.logo-img:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+
+/* Logo texte (Meilleur contraste) */
+.logo-text {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0px 0px 10px rgb(0, 0, 0), 0px 0px 20px rgba(255, 215, 0, 0.8);
+  letter-spacing: 1px;
+  transition: transform 0.2s ease-in-out, opacity 0.3s ease;
+}
+
+.logo-text:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  gap: 30px;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Liens de navigation */
+.nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.3rem;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid transparent;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Effet néon sur hover */
+.nav-link:hover {
+  background: #ffd700;
+  color: #000;
+  border-color: #ff007f;
+  transform: translateY(-3px);
+  box-shadow: 0px 4px 12px rgba(255, 215, 0, 0.6);
+}
+
+/* Effet gaming avec animation */
+.nav-link::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  width: 10px;
+  height: 10px;
+  background-color: #ffd700;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-link:hover::before {
+  left: -15px;
+  opacity: 1;
+}
+
+/* Bouton du menu mobile */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.2s ease-in-out;
+  z-index: 1100;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* Effet sur le bouton menu */
+.menu-toggle svg {
+  filter: drop-shadow(0px 0px 6px rgba(255, 215, 0, 0.8));
+}
+
+/* Menu Responsive */
+@media screen and (max-width: 768px) {
+  .nav {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+  }
+
+
+
+  /* Quand le menu est ouvert */
+  .nav.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Afficher le bouton hamburger */
+  .menu-toggle {
+    display: block;
+  }
+}
