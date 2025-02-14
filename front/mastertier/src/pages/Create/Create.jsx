@@ -1,15 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Create.css";
 import logo from "../../assets/logo.png";
 
 export default function Create() {
-  const [tierName, setTierName] = useState("");
-  const [categories, setCategories] = useState([""]);
-  const [items, setItems] = useState([""]);
+  const [tierName, setTierName] = useState("Meilleure Tier List");
+  const [categories, setCategories] = useState(["S", "A", "B", "C"]);
+  const [items, setItems] = useState([
+    { name: "Item 1", imageUrl: "" },
+    { name: "Item 2", imageUrl: "" },
+  ]);
 
-  const addCategory = () => {
-    setCategories([...categories, ""]);
-  };
+  useEffect(() => {
+    const savedTierName = localStorage.getItem("tierName");
+    const savedCategories = JSON.parse(localStorage.getItem("categories"));
+    const savedItems = JSON.parse(localStorage.getItem("items"));
+
+    if (savedTierName) setTierName(savedTierName);
+    if (savedCategories) setCategories(savedCategories);
+    if (savedItems) setItems(savedItems);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("tierName", tierName);
+    localStorage.setItem("categories", JSON.stringify(categories));
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [tierName, categories, items]);
+
+  const addCategory = () => setCategories([...categories, ""]);
 
   const updateCategory = (index, value) => {
     const newCategories = [...categories];
@@ -17,14 +34,20 @@ export default function Create() {
     setCategories(newCategories);
   };
 
-  const addItem = () => {
-    setItems([...items, ""]);
+  const removeCategory = (index) => {
+    setCategories(categories.filter((_, i) => i !== index));
   };
 
-  const updateItem = (index, value) => {
+  const addItem = () => setItems([...items, { name: "", imageUrl: "" }]);
+
+  const updateItem = (index, field, value) => {
     const newItems = [...items];
-    newItems[index] = value;
+    newItems[index][field] = value;
     setItems(newItems);
+  };
+
+  const removeItem = (index) => {
+    setItems(items.filter((_, i) => i !== index));
   };
 
   return (
@@ -62,6 +85,12 @@ export default function Create() {
                   value={category}
                   onChange={(e) => updateCategory(index, e.target.value)}
                 />
+                <button
+                  className="delete-btn"
+                  onClick={() => removeCategory(index)}
+                >
+                  ✖
+                </button>
               </div>
             ))}
           </div>
@@ -69,7 +98,7 @@ export default function Create() {
             Ajouter une catégorie
           </button>
 
-          <label className="label">Contenu à classer</label>
+          <label className="label">Éléments à classer</label>
           <div className="items-list">
             {items.map((item, index) => (
               <div key={index} className="item-entry">
@@ -77,9 +106,24 @@ export default function Create() {
                   type="text"
                   className="input item-input"
                   placeholder={`Élément ${index + 1}`}
-                  value={item}
-                  onChange={(e) => updateItem(index, e.target.value)}
+                  value={item.name}
+                  onChange={(e) => updateItem(index, "name", e.target.value)}
                 />
+                <input
+                  type="text"
+                  className="input item-input"
+                  placeholder="URL de l'image"
+                  value={item.imageUrl}
+                  onChange={(e) =>
+                    updateItem(index, "imageUrl", e.target.value)
+                  }
+                />
+                <button
+                  className="delete-btn"
+                  onClick={() => removeItem(index)}
+                >
+                  ✖
+                </button>
               </div>
             ))}
           </div>
@@ -87,7 +131,6 @@ export default function Create() {
             Ajouter un élément
           </button>
         </section>
-
         <button className="btn create-btn">Générer ma Tier List</button>
       </main>
     </div>
