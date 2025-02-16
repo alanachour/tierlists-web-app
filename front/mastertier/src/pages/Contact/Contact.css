@@ -1,0 +1,162 @@
+/* ======= RESET GENERAL ======= */
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;700&display=swap");
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Lexend", sans-serif;
+  background-color: black;
+  color: #00ff00;
+}
+
+/* ======= TERMINAL CONTAINER ======= */
+.contact-terminal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 20px;
+  background: black;
+  overflow: hidden;
+  position: relative;
+}
+
+/* === Effet Scanline CRT === */
+.contact-terminal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    rgba(0, 255, 0, 0.1) 0px,
+    rgba(0, 255, 0, 0.15) 2px,
+    transparent 4px
+  );
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+/* === Dark Web Mode === */
+.contact-terminal.dark-mode {
+  background: radial-gradient(circle, #222, black);
+  color: #ff007f;
+}
+
+.contact-terminal.dark-mode::before {
+  background: repeating-linear-gradient(
+    rgba(255, 0, 128, 0.1) 0px,
+    rgba(255, 0, 128, 0.2) 2px,
+    transparent 4px
+  );
+}
+
+/* ======= TERMINAL TEXTE ======= */
+.terminal-text {
+  font-size: 1.2rem;
+  white-space: pre-wrap;
+  max-width: 80%;
+  text-shadow: 0px 0px 10px #00ff00;
+  animation: text-flicker 1.5s infinite alternate;
+}
+
+/* === Effet de scintillement CRT === */
+@keyframes text-flicker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ======= BOUTONS ======= */
+.terminal-buttons {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* === STYLE DES BOUTONS === */
+.btn-troll,
+.btn-darkweb,
+.btn-back {
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: black;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  box-shadow: 0px 0px 5px #00ff00;
+  transition: all 0.3s;
+}
+
+.btn-troll:hover,
+.btn-darkweb:hover,
+.btn-back:hover {
+  background: #00ff00;
+  color: black;
+  box-shadow: 0px 0px 15px #00ff00;
+}
+
+/* === Dark Web Mode Buttons === */
+.contact-terminal.dark-mode .btn-troll,
+.contact-terminal.dark-mode .btn-darkweb,
+.contact-terminal.dark-mode .btn-back {
+  color: #ff007f;
+  border: 2px solid #ff007f;
+  box-shadow: 0px 0px 5px #ff007f;
+}
+
+.contact-terminal.dark-mode .btn-troll:hover,
+.contact-terminal.dark-mode .btn-darkweb:hover,
+.contact-terminal.dark-mode .btn-back:hover {
+  background: #ff007f;
+  color: black;
+  box-shadow: 0px 0px 15px #ff007f;
+}
+
+/* ======= FAUSSE ERREUR POPUP ======= */
+.error-popup {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: #ff0000;
+  padding: 20px;
+  border: 2px solid #ff0000;
+  box-shadow: 0px 0px 10px #ff0000;
+  font-size: 1.2rem;
+  text-align: center;
+  z-index: 100;
+  animation: glitch 0.2s infinite alternate;
+}
+
+.error-popup button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  border: none;
+  background: #ff0000;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.error-popup button:hover {
+  background: white;
+  color: #ff0000;
+}

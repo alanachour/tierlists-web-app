@@ -5,6 +5,9 @@ import Create from "./pages/Create/Create";
 import Explore from "./pages/Explore/Explore";
 import Footer from "./components/Footer/Footer";
 import Error404 from "./pages/Error/Error";
+import About from "./pages/About/About";
+import Contact from "./pages/Contact/Contact";
+import FAQ from "./pages/FAQ/FAQ";
 
 function App() {
   return (
@@ -14,6 +17,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<Create />} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/faq" element={<FAQ />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
