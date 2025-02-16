@@ -1,0 +1,133 @@
+/* Empêche le scroll horizontal */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Press Start 2P", cursive;
+  background-color: black;
+}
+
+/* Page principale */
+.error-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background: linear-gradient(120deg, #00d9ff, #ff007f);
+  transition: filter 0.3s ease;
+}
+
+/* Effet flou quand la vidéo est affichée */
+.error-page.blurred {
+  filter: blur(10px);
+}
+
+/* Overlay de la vidéo en premier plan */
+.video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* Conteneur de la vidéo */
+.video-container {
+  position: relative;
+  max-width: 800px;
+  width: 80vw;
+  height: 45vw;
+  max-height: 450px;
+  box-shadow: 0px 0px 15px white;
+  border-radius: 10px;
+}
+
+/* Vidéo YouTube */
+.youtube-video {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+/* Contenu principal */
+.error-content {
+  z-index: 2;
+  color: white;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Effet glitch animé sur le texte */
+.error-title {
+  font-size: 4rem;
+  font-weight: bold;
+  position: relative;
+  animation: glitch 1s infinite alternate;
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: 4px 4px 0px #ffd700, -4px -4px 0px #00d9ff;
+  }
+  100% {
+    text-shadow: -4px -4px 0px #ffd700, 4px 4px 0px #00d9ff;
+  }
+}
+
+.error-message {
+  font-size: 1.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 15px 25px;
+  border-radius: 10px;
+}
+
+/* Boutons */
+.error-btn,
+.play-video-btn,
+.easter-egg-btn {
+  padding: 14px 28px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ffd700, #ff007f);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.error-btn:hover,
+.play-video-btn:hover,
+.easter-egg-btn:hover {
+  transform: scale(1.1);
+  background: linear-gradient(45deg, #ff007f, #ffd700);
+}
+
+/* Mini-jeu Pong */
+.pong-game {
+  position: absolute;
+  top: 15%;
+  width: 80%;
+  height: 70%;
+  border: none;
+  z-index: 3;
+  box-shadow: 0px 0px 10px white;
+  border-radius: 10px;
+}

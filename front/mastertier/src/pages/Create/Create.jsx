@@ -4,6 +4,7 @@ import logo from "../../assets/logo.png";
 
 export default function Create() {
   const [tierName, setTierName] = useState("Meilleure Tier List");
+  const [coverImage, setCoverImage] = useState("");
   const [categories, setCategories] = useState(["S", "A", "B", "C"]);
   const [items, setItems] = useState([
     { name: "Item 1", imageUrl: "" },
@@ -12,19 +13,22 @@ export default function Create() {
 
   useEffect(() => {
     const savedTierName = localStorage.getItem("tierName");
+    const savedCoverImage = localStorage.getItem("coverImage");
     const savedCategories = JSON.parse(localStorage.getItem("categories"));
     const savedItems = JSON.parse(localStorage.getItem("items"));
 
     if (savedTierName) setTierName(savedTierName);
+    if (savedCoverImage) setCoverImage(savedCoverImage);
     if (savedCategories) setCategories(savedCategories);
     if (savedItems) setItems(savedItems);
   }, []);
 
   useEffect(() => {
     localStorage.setItem("tierName", tierName);
+    localStorage.setItem("coverImage", coverImage);
     localStorage.setItem("categories", JSON.stringify(categories));
     localStorage.setItem("items", JSON.stringify(items));
-  }, [tierName, categories, items]);
+  }, [tierName, coverImage, categories, items]);
 
   const addCategory = () => setCategories([...categories, ""]);
 
@@ -72,6 +76,15 @@ export default function Create() {
             placeholder="Ex: Meilleurs Films"
             value={tierName}
             onChange={(e) => setTierName(e.target.value)}
+          />
+
+          <label className="label">Image de couverture</label>
+          <input
+            type="text"
+            className="input cover-image-input"
+            placeholder="URL de l'image de couverture"
+            value={coverImage}
+            onChange={(e) => setCoverImage(e.target.value)}
           />
 
           <label className="label">Catégories</label>
