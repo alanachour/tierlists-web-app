@@ -265,3 +265,51 @@
   font-weight: bold;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.success-message,
+.error-message {
+  margin-top: 25px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.success-message {
+  color: white;
+  background: rgba(0, 128, 0, 0.85);
+  border: 3px solid #00ff88;
+  box-shadow: 0px 4px 12px rgba(0, 255, 136, 0.4);
+}
+
+.error-message {
+  color: white;
+  background: rgba(220, 20, 60, 0.85);
+  border: 3px solid #ff4d4d;
+  box-shadow: 0px 4px 12px rgba(255, 77, 77, 0.4);
+}
+
+.retour-container {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.retour-btn {
+  margin-top: 10px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(45deg, #ff007f, #ffd700);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.retour-btn:hover {
+  background: linear-gradient(45deg, #ffd700, #ff007f);
+  color: black;
+  transform: scale(1.05);
+}

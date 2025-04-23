@@ -1,2 +1,21 @@
-node_modules/
+# Node modules
+**/node_modules/
+
+# Logs
+*.log
+
+# Environments
 .env
+
+# Docker configs perso
+**/docker-compose.override.yml
+
+# VSCode settings
+.vscode/
+
+# OS system files
+.DS_Store
+
+# Kubernetes local configs
+.kube/
+.minikube/

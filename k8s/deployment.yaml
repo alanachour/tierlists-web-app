@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tierlist-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tierlist-backend
+  template:
+    metadata:
+      labels:
+        app: tierlist-backend
+    spec:
+      containers:
+        - name: tierlist-backend
+          image: ahmadal/tierlist-backend:latest
+          ports:
+            - containerPort: 3001

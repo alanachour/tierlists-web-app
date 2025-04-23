@@ -10,6 +10,7 @@ export default function Create() {
     { name: "Item 1", imageUrl: "" },
     { name: "Item 2", imageUrl: "" },
   ]);
+  const [creationStatus, setCreationStatus] = useState(null);
 
   useEffect(() => {
     const savedTierName = localStorage.getItem("tierName");
@@ -31,27 +32,49 @@ export default function Create() {
   }, [tierName, coverImage, categories, items]);
 
   const addCategory = () => setCategories([...categories, ""]);
-
   const updateCategory = (index, value) => {
     const newCategories = [...categories];
     newCategories[index] = value;
     setCategories(newCategories);
   };
-
   const removeCategory = (index) => {
     setCategories(categories.filter((_, i) => i !== index));
   };
 
   const addItem = () => setItems([...items, { name: "", imageUrl: "" }]);
-
   const updateItem = (index, field, value) => {
     const newItems = [...items];
     newItems[index][field] = value;
     setItems(newItems);
   };
-
   const removeItem = (index) => {
     setItems(items.filter((_, i) => i !== index));
+  };
+
+  const handleCreateTierList = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/api/tierlists", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: tierName,
+          coverImage,
+          categories,
+          items,
+        }),
+      });
+
+      if (!response.ok) throw new Error();
+      setCreationStatus("success");
+    } catch {
+      setCreationStatus("error");
+    }
+  };
+
+  const handleResetForm = () => {
+    setCreationStatus(null);
   };
 
   return (
@@ -68,83 +91,112 @@ export default function Create() {
 
       <main className="content">
         <h1 className="main-title">Crée ta Tier List</h1>
-        <section className="form-section">
-          <label className="label">Titre de la Tier List</label>
-          <input
-            type="text"
-            className="input title-input"
-            placeholder="Ex: Meilleurs Films"
-            value={tierName}
-            onChange={(e) => setTierName(e.target.value)}
-          />
 
-          <label className="label">Image de couverture</label>
-          <input
-            type="text"
-            className="input cover-image-input"
-            placeholder="URL de l'image de couverture"
-            value={coverImage}
-            onChange={(e) => setCoverImage(e.target.value)}
-          />
+        {creationStatus === null && (
+          <section className="form-section">
+            <label className="label">Titre de la Tier List</label>
+            <input
+              type="text"
+              className="input title-input"
+              placeholder="Ex: Meilleurs Films"
+              value={tierName}
+              onChange={(e) => setTierName(e.target.value)}
+            />
 
-          <label className="label">Catégories</label>
-          <div className="categories-list">
-            {categories.map((category, index) => (
-              <div key={index} className="category-item">
-                <input
-                  type="text"
-                  className="input category-input"
-                  placeholder={`Catégorie ${index + 1}`}
-                  value={category}
-                  onChange={(e) => updateCategory(index, e.target.value)}
-                />
-                <button
-                  className="delete-btn"
-                  onClick={() => removeCategory(index)}
-                >
-                  ✖
-                </button>
-              </div>
-            ))}
+            <label className="label">Image de couverture</label>
+            <input
+              type="text"
+              className="input cover-image-input"
+              placeholder="URL de l'image de couverture"
+              value={coverImage}
+              onChange={(e) => setCoverImage(e.target.value)}
+            />
+
+            <label className="label">Catégories</label>
+            <div className="categories-list">
+              {categories.map((category, index) => (
+                <div key={index} className="category-item">
+                  <input
+                    type="text"
+                    className="input category-input"
+                    placeholder={`Catégorie ${index + 1}`}
+                    value={category}
+                    onChange={(e) => updateCategory(index, e.target.value)}
+                  />
+                  <button
+                    className="delete-btn"
+                    onClick={() => removeCategory(index)}
+                  >
+                    ✖
+                  </button>
+                </div>
+              ))}
+            </div>
+            <button className="btn add-btn" onClick={addCategory}>
+              Ajouter une catégorie
+            </button>
+
+            <label className="label">Éléments à classer</label>
+            <div className="items-list">
+              {items.map((item, index) => (
+                <div key={index} className="item-entry">
+                  <input
+                    type="text"
+                    className="input item-input"
+                    placeholder={`Élément ${index + 1}`}
+                    value={item.name}
+                    onChange={(e) =>
+                      updateItem(index, "name", e.target.value)
+                    }
+                  />
+                  <input
+                    type="text"
+                    className="input item-input"
+                    placeholder="URL de l'image"
+                    value={item.imageUrl}
+                    onChange={(e) =>
+                      updateItem(index, "imageUrl", e.target.value)
+                    }
+                  />
+                  <button
+                    className="delete-btn"
+                    onClick={() => removeItem(index)}
+                  >
+                    ✖
+                  </button>
+                </div>
+              ))}
+            </div>
+            <button className="btn add-btn" onClick={addItem}>
+              Ajouter un élément
+            </button>
+          </section>
+        )}
+
+        {creationStatus === "success" && (
+          <div className="success-message">
+            ✅ Tier List enregistrée avec succès !
           </div>
-          <button className="btn add-btn" onClick={addCategory}>
-            Ajouter une catégorie
-          </button>
-
-          <label className="label">Éléments à classer</label>
-          <div className="items-list">
-            {items.map((item, index) => (
-              <div key={index} className="item-entry">
-                <input
-                  type="text"
-                  className="input item-input"
-                  placeholder={`Élément ${index + 1}`}
-                  value={item.name}
-                  onChange={(e) => updateItem(index, "name", e.target.value)}
-                />
-                <input
-                  type="text"
-                  className="input item-input"
-                  placeholder="URL de l'image"
-                  value={item.imageUrl}
-                  onChange={(e) =>
-                    updateItem(index, "imageUrl", e.target.value)
-                  }
-                />
-                <button
-                  className="delete-btn"
-                  onClick={() => removeItem(index)}
-                >
-                  ✖
-                </button>
-              </div>
-            ))}
+        )}
+        {creationStatus === "error" && (
+          <div className="error-message">
+            ❌ Une erreur est survenue lors de la création.
           </div>
-          <button className="btn add-btn" onClick={addItem}>
-            Ajouter un élément
+        )}
+
+        {creationStatus !== null && (
+          <div className="retour-container">
+            <button className="btn retour-btn" onClick={handleResetForm}>
+              ↩️ Revenir
+            </button>
+          </div>
+        )}
+
+        {creationStatus === null && (
+          <button className="btn create-btn" onClick={handleCreateTierList}>
+            Générer ma Tier List
           </button>
-        </section>
-        <button className="btn create-btn">Générer ma Tier List</button>
+        )}
       </main>
     </div>
   );
