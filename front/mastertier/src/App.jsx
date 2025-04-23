@@ -8,6 +8,7 @@ import Error404 from "./pages/Error/Error";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import FAQ from "./pages/FAQ/FAQ";
+import UniqueTierList from "./pages/TierListPage/TierList";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/tierlist" element={<UniqueTierList />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
