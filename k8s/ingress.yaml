@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: tierlist-backend-ingress
+  name: tierlist-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -9,10 +9,17 @@ spec:
   - host: tierlist.local
     http:
       paths:
-      - path: /
+      - path: /api/tierlists
         pathType: Prefix
         backend:
           service:
             name: tierlist-backend-service
             port:
               number: 3001
+      - path: /api/stats
+        pathType: Prefix
+        backend:
+          service:
+            name: stats-service
+            port:
+              number: 3002
