@@ -1,4 +1,4 @@
-require('dotenv').config();   // ← Cette ligne doit être en premier
+require('dotenv').config();  
 const app = require('./app');
 
 const PORT = process.env.PORT || 3002;

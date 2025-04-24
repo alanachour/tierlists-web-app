@@ -5,7 +5,7 @@ app.get('/api/stats', (req, res) => {
     res.json({
         totalTierlists: 42,
         mostUsedCategory: 'S',
-        mostPopularItem: 'Goku'
+        mostPopularItem: 'Simon GHOST Riley'
     });
 });
 
