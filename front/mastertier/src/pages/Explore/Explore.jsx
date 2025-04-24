@@ -36,6 +36,10 @@ export default function Explore() {
     });
   };
 
+  const filteredLists = sortTierLists(sampleTierLists).filter((tier) =>
+    tier.title.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div className="explore-wrapper">
       <header className="explore-header">
@@ -68,13 +72,15 @@ export default function Explore() {
         </div>
       </header>
 
+      <p className="results-count">Résultats : {filteredLists.length}</p>
+
       <main className="tier-list-grid">
-        {sortTierLists(sampleTierLists)
-          .filter((tier) =>
-            tier.title.toLowerCase().includes(search.toLowerCase())
-          )
-          .map((tier, index) => (
+        {filteredLists.length === 0 ? (
+          <p className="no-results">😢 Aucun résultat trouvé...</p>
+        ) : (
+          filteredLists.map((tier, index) => (
             <div key={index} className="tier-card card-shadow">
+              {index === 0 && <div className="tier-badge">🔥 Populaire</div>}
               <div className="tier-image-wrapper hover-zoom">
                 <img
                   src={tier.coverImage}
@@ -89,7 +95,8 @@ export default function Explore() {
               </p>
               <button className="btn-view wavy-button">👀 Voir plus</button>
             </div>
-          ))}
+          ))
+        )}
       </main>
 
       <footer className="footer">
