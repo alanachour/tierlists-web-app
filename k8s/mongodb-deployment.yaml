@@ -20,3 +20,10 @@ spec:
           env:
             - name: MONGO_INITDB_DATABASE
               value: mastertier  # Initializes the DB with 'mastertier' database
+          volumeMounts:
+            - name: mongodb-storage  # Mounts the volume inside the container
+              mountPath: /data/db    # MongoDB default data path
+      volumes:
+        - name: mongodb-storage
+          persistentVolumeClaim:
+            claimName: mongodb-pvc  # Binds the pod to the PVC for persistent storage

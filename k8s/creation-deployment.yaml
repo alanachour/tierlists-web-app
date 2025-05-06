@@ -15,5 +15,9 @@ spec:
       containers:
         - name: tierlist-backend
           image: ahmadal/tierlist-backend:latest  # Uses the latest backend image from Docker Hub
+          imagePullPolicy: Always                # Always pull the latest image version
           ports:
-            - containerPort: 3001  # Exposes port 3001 inside the container
+            - containerPort: 3001                # Exposes port 3001 inside the container
+          env:
+            - name: MONGO_URI                    # Injects MongoDB connection string
+              value: mongodb://mongodb-service:27017/mastertier

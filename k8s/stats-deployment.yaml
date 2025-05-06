@@ -15,5 +15,9 @@ spec:
       containers:
         - name: stats-service
           image: ahmadal/stats-service:latest  # Uses the latest stats-service image
+          imagePullPolicy: Always               # Forces Kubernetes to always pull the latest image
           ports:
-            - containerPort: 3002  # Exposes port 3002 inside the container
+            - containerPort: 3002              # Exposes port 3002 inside the container
+          env:
+            - name: MONGO_URI                  # Injects MongoDB URI into the container
+              value: mongodb://mongodb-service:27017/mastertier  # Internal service name for MongoDB in the cluster
