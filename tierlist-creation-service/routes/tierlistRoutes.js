@@ -3,7 +3,7 @@ import { createTierList, getTierLists } from '../controllers/tierlistController.
 
 const router = express.Router();
 
-router.post('/tierlists', createTierList);
-router.get('/tierlists', getTierLists); // <- celle-ci
+router.post('/tierlists', createTierList);  // Handles POST requests to create a new tier list
+router.get('/tierlists', getTierLists);     // Handles GET requests to retrieve all tier lists
 
 export default router;

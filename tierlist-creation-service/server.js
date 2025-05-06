@@ -2,13 +2,14 @@ import dotenv from 'dotenv';
 import app from './app.js';
 import connectDB from './config/db.js';
 
+// Load environment variables from .env file
 dotenv.config();
 
-// Connexion à la base de données
+// Connect to the database
 connectDB();
 
-// Lancer le serveur
-const PORT = process.env.PORT || 3001;
+// Start the server
+const PORT = process.env.PORT || 3001;  // Use custom port from .env or default to 3001
 app.listen(PORT, () => {
-  console.log(`Serveur backend lancé sur le port ${PORT}`);
+  console.log(`Backend server running on port ${PORT}`);
 });

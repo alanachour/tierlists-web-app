@@ -1,20 +1,20 @@
-# Image de base officielle Node.js
+# Use official Node.js base image
 FROM node:18-alpine
 
-# Créer le dossier de travail
+# Create working directory
 WORKDIR /app
 
-# Copier les fichiers de dépendances
+# Copy dependency files
 COPY package*.json ./
 
-# Installer les dépendances
+# Install dependencies
 RUN npm install
 
-# Copier le reste du projet
+# Copy the rest of the project files
 COPY . .
 
-# Exposer le port de ton backend
+# Expose backend port
 EXPOSE 3001
 
-# Commande de démarrage
+# Start the application
 CMD ["npm", "start"]

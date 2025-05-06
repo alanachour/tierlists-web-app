@@ -21,11 +21,11 @@ const tierListSchema = new mongoose.Schema(
     },
     items: {
       type: [itemSchema],
-      required: false,
+      required: false,  // Optional list of items with name and imageUrl
     },
   },
   {
-    timestamps: true,
+    timestamps: true,  // Automatically adds createdAt and updatedAt fields
   }
 );
 
