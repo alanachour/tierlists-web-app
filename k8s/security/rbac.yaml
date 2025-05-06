@@ -12,7 +12,7 @@ metadata:
 rules:
 - apiGroups: [""]
   resources: ["pods"]
-  verbs: ["get", "list", "watch"]
+  verbs: ["get", "list", "watch"]  # Grants read-only access to pods
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -26,4 +26,4 @@ subjects:
 roleRef:
   kind: Role
   name: pod-reader
-  apiGroup: rbac.authorization.k8s.io
+  apiGroup: rbac.authorization.k8s.io  # Binds the role to the service account

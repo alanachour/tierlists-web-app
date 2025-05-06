@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
         - name: mongodb
-          image: mongo:6.0
+          image: mongo:6.0  # MongoDB version 6.0
           ports:
-            - containerPort: 27017
+            - containerPort: 27017  # Default MongoDB port
           env:
             - name: MONGO_INITDB_DATABASE
-              value: mastertier
+              value: mastertier  # Initializes the DB with 'mastertier' database

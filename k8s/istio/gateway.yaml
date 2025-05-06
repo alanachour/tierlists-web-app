@@ -5,11 +5,11 @@ metadata:
   namespace: default
 spec:
   selector:
-    istio: ingressgateway  # Cible l'Ingress Gateway d'Istio
+    istio: ingressgateway  # Selects the default Istio ingress gateway
   servers:
   - port:
       number: 80
       name: http
       protocol: HTTP
     hosts:
-    - "*"
+    - "*"  # Accepts requests from any host

@@ -10,5 +10,5 @@ spec:
   ports:
     - protocol: TCP
       port: 3001
-      targetPort: 3001
-  type: ClusterIP
+      targetPort: 3001  # Forwards traffic to port 3001 on the matching pods
+  type: ClusterIP  # Internal service accessible only within the cluster

@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   hosts:
-  - "*"
+  - "*"  # Accepts requests from any host — fine for dev, restrict in prod
   gateways:
   - tierlist-gateway
   http:

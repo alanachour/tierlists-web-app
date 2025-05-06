@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: stats-service
 spec:
-  type: ClusterIP
+  type: ClusterIP  # Makes the service accessible only within the cluster
   selector:
     app: stats-service
   ports:
     - protocol: TCP
       port: 3002
-      targetPort: 3002
+      targetPort: 3002  # Routes traffic to port 3002 on the container

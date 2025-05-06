@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: tierlist-backend
-          image: ahmadal/tierlist-backend:latest
+          image: ahmadal/tierlist-backend:latest  # Uses the latest backend image from Docker Hub
           ports:
-            - containerPort: 3001
+            - containerPort: 3001  # Exposes port 3001 inside the container
