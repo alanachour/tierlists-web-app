@@ -53,7 +53,7 @@ export default function Create() {
 
   const handleCreateTierList = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/tierlists", {
+      const response = await fetch("http://localhost:8080/api/tierlists", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
