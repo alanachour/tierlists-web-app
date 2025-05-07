@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./Stats.css"; // crée un fichier CSS similaire à Create.css
+import "./Stats.css";
 import logo from "../../assets/logo.png";
 
 export default function Stats() {
@@ -13,7 +13,7 @@ export default function Stats() {
         return res.json();
       })
       .then((data) => {
-        // S’assurer que les champs existent
+        // Vérification des champs attendus
         if (
           data &&
           typeof data.totalTierlists !== "undefined" &&
@@ -30,7 +30,6 @@ export default function Stats() {
         setError(true);
       });
   }, []);
-  
 
   return (
     <div className="create-wrapper">

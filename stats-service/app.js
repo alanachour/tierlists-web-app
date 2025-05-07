@@ -2,9 +2,12 @@
 // Sets up the Express application and defines API routes.
 
 const express = require('express');
+const cors = require("cors");
+
 const { getStats, debugMongo } = require('./db'); // Import the real stats function from db.js
 
 const app = express();
+app.use(cors());
 
 // Route to get real tierlist statistics from MongoDB
 app.get('/api/stats', getStats);
